@@ -80,12 +80,6 @@ class EntenHausen:
         entengruppierung.update([(100, grp1), (200, grp2), (300, grp3)])
         return entengruppierung
 
-        # ausgangsdict erstellen, mit ints und none?
-        # die leere listen auch erstellen
-        # object von der Liste mit for auslesen
-        # gewicht von den obj definieren -> var
-        # mit if die gewicht einstufen und in die listen einfügen
-        # die dict aktualisieren
 
 
 if __name__ == '__main__':

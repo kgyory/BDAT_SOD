@@ -111,7 +111,7 @@ class Accounting:
         category_dict = {}
         for x in self.__real_estates:
             if x.category in category_dict:
-                category_dict[x] += 1
+                category_dict[x.category] += 1
             else:
                 category_dict[x.category] = 1
         return category_dict

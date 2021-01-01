@@ -115,6 +115,10 @@ class Registrierkasse:
         self.__getraenkeliste.append(g)
         self.__verkaufte_getraenke += 1
 
+    def getraenke_sortiert(self): #Ich habe auch keine Ahnung was Comparator Klasse ist...
+        self.__getraenkeliste.sort(key=lambda x: x.get_anzahl_zutaten())
+        return self.__getraenkeliste
+
     def get_g_a_n_z(self) -> Dict[int, List[Getraenk]]:
         g_aufgeteilt = {}
         for z in self.__getraenkeliste:
@@ -156,10 +160,10 @@ if __name__ == '__main__':
     # print(liit.menge_in_ml())
 
     root = SimplesGertaenk('rootb', rb)
-    print(root.brennt())
-    print(root.get_anzahl_zutaten())
-    print(root.beinhaltet_alkohol())
-    print(root.menge_in_ml())
+    # print(root.brennt())
+    # print(root.get_anzahl_zutaten())
+    # print(root.beinhaltet_alkohol())
+    # print(root.menge_in_ml())
 
     k = Registrierkasse()
 
@@ -168,5 +172,9 @@ if __name__ == '__main__':
     Registrierkasse.verkauft(k, vc)
     Registrierkasse.verkauft(k, gin_otr)
     Registrierkasse.verkauft(k, apfel_pur)
+
+    print(k._Registrierkasse__getraenkeliste)
+
+    print(k.getraenke_sortiert())
 
     print(k.get_g_a_n_z())

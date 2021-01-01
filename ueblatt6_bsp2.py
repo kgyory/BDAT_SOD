@@ -85,8 +85,8 @@ class Cocktail(Getraenk):
 
     def brennt(self) -> bool:
         y = 0
-        for x in range(len(self.bestandteile)):
-            y += self.bestandteile[x].alkohol_prozent
+        for x in self.bestandteile:
+            y += x.alkohol_prozent
         return y > 30
 
     def get_anzahl_zutaten(self) -> int:
@@ -94,35 +94,35 @@ class Cocktail(Getraenk):
 
     def beinhaltet_alkohol(self) -> bool:
         y = 0
-        for x in range(len(self.bestandteile)):
-            y += self.bestandteile[x].alkohol_prozent
+        for x in self.bestandteile:
+            y += x.alkohol_prozent
         return y > 0
 
     def menge_in_ml(self) -> float:
         y = 0
-        for x in range(len(self.bestandteile)):
-            y += self.bestandteile[x].menge
+        for x in self.bestandteile:
+            y += x.menge
         return y
 
 
 class Registrierkasse:
-    verkaufte_getraenke = 0
+    __verkaufte_getraenke = 0
 
     def __init__(self):
         self.__getraenkeliste = []
 
     def verkauft(self, g: Getraenk):
         self.__getraenkeliste.append(g)
-        self.verkaufte_getraenke += 1
+        self.__verkaufte_getraenke += 1
 
     def get_g_a_n_z(self) -> Dict[int, List[Getraenk]]:
         g_aufgeteilt = {}
-        for z in range(len(self.__getraenkeliste)):
-            y = self.__getraenkeliste[z].get_anzahl_zutaten()
+        for z in self.__getraenkeliste:
+            y = z.get_anzahl_zutaten()
             if y in g_aufgeteilt:
-                g_aufgeteilt[y].append(self.__getraenkeliste[z].name)
+                g_aufgeteilt[y].append(z.name)
             else:
-                g_aufgeteilt[y] = [self.__getraenkeliste[z].name]
+                g_aufgeteilt[y] = [z.name]
         return g_aufgeteilt
 
 
@@ -156,10 +156,10 @@ if __name__ == '__main__':
     # print(liit.menge_in_ml())
 
     root = SimplesGertaenk('rootb', rb)
-    # print(root.brennt())
-    # print(root.get_anzahl_zutaten())
-    # print(root.beinhaltet_alkohol())
-    # print(root.menge_in_ml())
+    print(root.brennt())
+    print(root.get_anzahl_zutaten())
+    print(root.beinhaltet_alkohol())
+    print(root.menge_in_ml())
 
     k = Registrierkasse()
 

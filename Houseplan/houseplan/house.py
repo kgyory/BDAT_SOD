@@ -86,14 +86,26 @@ class House:
         else:
             self.rooms[room.type] = [room]
 
+    # def get_window_area_facing_orientation(self, orientation: str) -> float:
+    #     w = 0.0
+    #     for x in self.rooms.values():
+    #         for y in x:
+    #             for z in y.openings.keys():
+    #                 for v in range(len(y.openings[z])):
+    #                     if isinstance(y.openings[z][v], Window) and z == orientation:
+    #                         w += y.openings[z][v].height * y.openings[z][v].width
+    #     return w
+
+    # a more elegant version:
     def get_window_area_facing_orientation(self, orientation: str) -> float:
         w = 0.0
         for x in self.rooms.values():
             for y in x:
-                for z in y.openings.keys():
-                    for v in range(len(y.openings[z])):
-                        if isinstance(y.openings[z][v], Window) and z == orientation:
-                            w += y.openings[z][v].height * y.openings[z][v].width
+                for key, value in y.openings.items():
+                    if key == orientation:
+                        for v in value:
+                            if isinstance(v, Window):
+                                w += v.height * v.width
         return w
 
     def get_number_of_openings_in_room_type(self, type: str) -> int:
@@ -146,6 +158,6 @@ if __name__ == '__main__':
     print(h.rooms)
     print(master_bed.openings)
 
-    print(h.get_window_area_facing_orientation('EAST'))
+    print(h.get_window_area_facing_orientation('WEST'))
     print(h.get_number_of_openings_in_room_type('EATINKITCHEN'))
     print(h.get_all_connected_rooms(corridor))

@@ -115,17 +115,28 @@ class House:
                 v += len(y)
         return v
 
+    # def get_all_connected_rooms(self, room: Room) -> List[Room]:
+    #     connected_rooms = []
+    #     for z in room.openings.values():
+    #         for v in range(len(z)):
+    #             if type(z[v]) == Door:
+    #                 if z[v].room1 not in connected_rooms and z[v].room1 != room:
+    #                     connected_rooms.append(z[v].room1)
+    #                 if z[v].room2 not in connected_rooms and z[v].room2 != room:
+    #                     connected_rooms.append(z[v].room2)
+    #     return connected_rooms
+    #
+    # alternative version with set():
+
     def get_all_connected_rooms(self, room: Room) -> List[Room]:
-        connected_rooms = []
+        connected_rooms = set()
         for z in room.openings.values():
             for v in range(len(z)):
                 if type(z[v]) == Door:
-                    if z[v].room1 not in connected_rooms and z[v].room1 != room:
-                        connected_rooms.append(z[v].room1)
-                    if z[v].room2 not in connected_rooms and z[v].room2 != room:
-                        connected_rooms.append(z[v].room2)
-        return connected_rooms
-
+                    connected_rooms.add(z[v].room1)
+                    connected_rooms.add(z[v].room2)
+        connected_rooms.remove(room)
+        return list(connected_rooms)
 
 if __name__ == '__main__':
     corridor = Room("CORRIDOR", 15)
